@@ -1,0 +1,379 @@
+$(document).ready(function() {
+    count = 0;
+    right = 0;
+    wrong = 0;
+    total = 0;
+    correct_count = 0;
+    lng = "eng";
+
+    correct = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    $(".game, #home, #score, .time, #questionscreen, #volume_icon").hide();
+
+    function reset() {
+
+        count = 0;
+        right = 0;
+        wrong = 0;
+        total = 0;
+        charlen = 0;
+        n = 0;
+        $("#main").css({"box-shadow":"none","background":"none"});
+        $(".game, #home").hide();
+        $("#listing_page,#copyright").show();
+        $(".game, #home, #score, .time, #questionscreen, #volume_icon,#quesarea2").hide();
+        $(".time").TimeCircles().destroy();
+        $("#right").html(right);
+        $("#wrong").html(wrong);
+        $("audio").trigger("pause");
+        $("body").delay(1000).css({
+            "background": "url('images/background2.jpg')",
+            "background-size": "100vw 100vh"
+        });
+        //$("#options,#word").empty();
+        if (lng == "mal") {
+            $("#quesarea").html("");
+        } else {
+            $("#quesarea").html("");
+        }
+
+    }
+
+    $(".lan").click(function() {
+
+        $("#buttonclick").trigger("play");
+        lng = $(this).attr("id");
+        $(".lan").addClass("btn-danger").css("opacity", "0.5");
+        $(this).removeClass("btn-danger").addClass("btn-success").css("opacity", "1");
+        if (lng == "mal") {
+
+            $("#quesarea").html("");
+            $("#level1").html("ലെവൽ -1");
+            $("#option1 b").html("");
+            $("#level2").html("ലെവൽ -2");
+            $("#option2 b").html("");
+            $("#level3").html("ലെവൽ -3");
+            $("#option3 b").html(" ");
+            $("#right_span").html("ശരി ");
+            $("#wrong_span").html("തെറ്റ് ");
+
+
+        } else {
+
+            $("#quesarea").html(");
+            $("#level1").html("LEVEL- 1");
+            $("#option1 b").html("");
+            $("#level2").html("LEVEL- 2");
+            $("#option2 b").html("");
+            $("#level3").html("LEVEL- 3");
+            $("#option3 b").html("");
+            $("#right_span").html("Right");
+            $("#wrong_span").html("Wrong");
+
+        }
+
+    });
+
+    function randOrd() {
+        return (Math.round(Math.random()) - 0.5);
+    }
+
+    $(".level").click(function() {
+        correct_count = 0;
+        right = 0;
+        wrong = 0;
+        $("#main").css({"box-shadow":"0 0px 5px 4px grey","background":"white"});
+        $("#buttonclick").trigger("play");
+        levelId = $(this).attr('id');
+        order = $(this).data("order");
+        $("#listing_page,#copyright, #quesarea").hide();
+        $("#home, .time, #volume_icon, #score, #questionscreen").fadeIn(1000);
+        $("#container_level" + order).fadeIn(500);
+
+        $("body").delay(1000).css({
+            "background": "url('images/background1.jpg')",
+            "background-size": "100vw 100vh"
+        });
+        $(".time").TimeCircles({
+            time: {
+                Days: {
+                    show: false
+                },
+                Hours: {
+                    show: false
+                }
+            }
+        }).start();
+
+
+        data = $.getJSON("JSON/" + lng + "/level" + order + ".json", function() {
+            quest = data.responseJSON.questions;
+            quest.sort(randOrd);
+            if (order == "1") {
+                if (lng == "eng") {
+
+                    $("#quesarea").text("").fadeIn(1000);
+
+                } else {
+
+                    $("#quesarea").text("").fadeIn(1000);
+
+                }
+                $("#questaudio").attr("src", "sounds/" + lng + "/level1.ogg").trigger("play");
+
+
+                questions();
+
+            }
+            if (order == "2") {
+               if (lng == "eng") {
+                    $("#questionscreen").html("Question- " + (count) + "/" + quest.length);
+                    $("#quesarea").text("").fadeIn(1000);
+
+                } else {
+                    $("#questionscreen").html("ചോദ്യം- " + (count) + "/" + quest.length);
+                    $("#quesarea").text("").fadeIn(1000);
+
+                }
+               $("#questaudio").attr("src", "sounds/"+lng+"/level2.ogg").trigger("play");
+
+               level2();
+
+            }
+        });
+
+    });
+    $("#volume_icon").on('click', function() {
+        $("#questaudio").trigger('play');
+    });
+
+    function questions() {
+
+       $("#container_level" + order).fadeIn(100);
+       optionarry=[];
+       $(".dragged").draggable("enable").removeClass("dragged");
+       $(".drag").removeAttr("style").css("position","relative");
+        $(".drag").attr("disabled",false).removeClass("btn-success btn-danger").addClass("btn-info");
+       //alert(count);
+       for (i=0;i<3;i++){
+            $("#img"+(i+1)+" img").attr(
+                "src","images/level1/" + quest[count].img + ".jpg"
+
+            );
+            $("#drop"+(i+1)).attr({"data-ans": quest[count].ans,"data-audio":quest[count].audio});
+            optionarry.push({"ans":quest[count].ans,"audio":quest[count].audio});
+
+            count++;
+
+       }
+       optionarry.sort(randOrd);
+       optionarry.sort(randOrd);
+       for (i=0;i<3;i++){
+            $("#img"+(i+4)).attr({
+            
+            "data-object": optionarry[i].ans
+
+            }).html(optionarry[i].ans).prev().attr("data-audio",optionarry[i].audio).show();
+            // ans = quest[count].animal;
+            }
+            
+        if (lng == "eng") {
+            $("#questionscreen").html("Question- " + (count) + "/" + quest.length);
+
+        } else {
+            $("#questionscreen").html("ചോദ്യം- " + (count) + "/" + quest.length);
+
+        }
+            $(".drag").draggable({revert:"invalid",tolerence:"fit",containment:"#container_level1"});
+            $(".drag").draggable("enable");
+            gamedrop() ;
+    }
+
+     function level2() {
+               if (lng == "eng") {
+                        $("#questionscreen").html("Question- " + (count+1) + "/" + quest.length);
+
+                    } else {
+                        $("#questionscreen").html("ചോദ്യം- " + (count+1) + "/" + quest.length);
+
+                    }
+               $("#container_level"+order).fadeIn(100);
+               
+               ans = quest[count].ans;
+               audio=quest[count].audio;
+               optionarray=[];
+              
+               for(i=0;i<quest.length;i++){
+                    optionarray.push({"opts":quest[i].ans,"audio":quest[i].audio});
+               }
+               optionarray.sort(randOrd);
+               options=optionarray.slice(0,3);
+               console.log(options);
+               result=$.grep(options, function(e){ return e.opts == ans; });
+               if(result.length == 0){
+                    options.pop();
+                    options.push({"opts":ans,"audio":audio});
+                    console.log(options);
+               }
+
+               options.sort(randOrd);
+                for (i=0; i<3;i++){
+                        $("#opt"+(i+1)+" img").attr("src","images/level1/"+options[i].opts+".jpg").attr("data-audio",options[i].audio);
+                }
+               $("#lev2quest img").attr("src","images/level1/"+quest[count].img+".jpg");
+               $("#question").html(quest[count].ques);
+               $(".lev2options").attr("disabled",false).removeClass("btn-danger btn-success").addClass("btn-default");
+     }
+
+
+   /* $("#quest_audio2").on('click', function() {
+
+        $("#ansaudio").trigger('play');
+    });*/
+
+    function gamedrop() {
+
+        $(".drop").droppable({
+
+            drop: function(event, ui) {
+                $("audio").trigger("pause");
+                drop_ans = ui.draggable.text();
+
+                optans = $(this).attr("data-ans");
+                audio=$(this).attr("data-audio");
+                ui.draggable.draggable("option", "revert", false);
+                
+                if (optans == drop_ans) {
+                ui.draggable.prev().hide();
+                    ui.draggable.position({
+                        my: "center",
+                        of: $(this)
+                    });
+                    
+                    ui.draggable.removeClass("btn-danger btn-info").addClass("dragged btn-success");
+                   // $(".drag").draggable("disable");
+                   ui.draggable.draggable("disable");
+                    $("#correctclip").trigger('play');
+                    right++;
+                    $("#ansaudio").attr('src', "sounds/"+lng+"/" + audio + ".ogg").trigger('play');
+                    
+
+
+                  
+                    
+                    
+
+                } else {
+                    ui.draggable.draggable("option", "revert", true);
+                    ui.draggable.removeClass("btn-default").addClass("btn-danger");
+                   
+                    wrong++;
+                    $("#wrongclip").trigger('play');
+                }
+                $("#right").text(right);
+                $("#wrong").text(wrong);
+
+            }
+
+        });
+
+    }
+
+
+
+    $(document).on('click', '.lev2options', function() {
+
+        clicked = $(this).children().attr("data-audio");
+
+        if (clicked == ans) {
+            //audio=$(this).attr("data-audio");
+            $("#ansaudio").attr("src", "sounds/"+lng+"/" + clicked + ".ogg").trigger('play');
+            $("#correctclip").trigger("play");
+            $(this).addClass("btn-success");
+            right++;
+            $("#right").html(right);
+            $(".lev2options").attr("disabled","disabled");
+
+        } else {
+
+            $(this).addClass("btn-danger");
+            wrong++;
+            $("#wrong").html(wrong);
+            $("#wrongclip").trigger("play");
+            $(this).attr("disabled","disabled");
+
+        }
+
+
+
+    });
+    $('#ansaudio').on('ended', function() {
+
+            if(order== 1){
+                    $(".drag").draggable("enable");
+                    $(".dragged").draggable("disable");
+                    if(right%3==0){
+                            if (count == 9) {
+                                correct_count = 0
+                                correct.sort(randOrd);
+                            }
+                            $("#correctaudio").attr("src", "sounds/correct" + correct[correct_count] + ".ogg").trigger('play');
+                            //count++;
+                            correct_count++;
+                   }
+          }else{
+                count++;
+                if (count == 9) {
+                                correct_count = 0
+                                correct.sort(randOrd);
+                            }
+                            $("#correctaudio").attr("src", "sounds/correct" + correct[correct_count] + ".ogg").trigger('play');
+
+                            correct_count++;
+
+          }
+    });
+
+    $('#correctaudio').on('ended', function() {
+
+
+        if (count < quest.length) {
+            $("#container_level" + order).fadeOut(500, function() {
+                switch (order) {
+                    case 1:
+                        questions();
+                        break;
+                    case 2:
+                        level2();
+                        break;
+                }
+            });
+
+
+        } else {
+
+            $("#completed").trigger("play");
+            $(".time").TimeCircles().stop();
+            accuracy = Math.round((right / (right + wrong)) * 100);
+            alert("LEVEL COMPLETED\n Accuracy-" + accuracy + "%");
+            reset();
+
+        }
+    });
+    $(".options img").click(function() {
+        audio = $(this).attr("data-audio");
+        $("#optaudio").attr("src", "sounds/" + lng + "/" + audio + ".ogg").trigger("play");
+
+    });
+
+    $("#volume_icon").click(function() {
+        $("#questaudio").trigger("play");
+
+    });
+
+    $("#home").click(function() {
+
+        $("#buttonclick").trigger("play");
+        reset();
+    });
+
+});

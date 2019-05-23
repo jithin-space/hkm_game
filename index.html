@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Water Footprint Calculator</title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="css/TimeCircles.css">
+      <link rel="stylesheet" href="css/bootstrap.css">
+      <link rel="stylesheet" href="css/mystyle.css">
+      <!--script> window.$ = window.jQuery = require('./js/jquery.min.js');</script-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/jquery-ui.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/bootstrap-dialog.min.js"></script>       
+      <script src="js/popper.min.js"></script>
+      <script src="js/main.js"></script>
+      <script src="js/TimeCircles.js"></script>
+   </head>
+   <body>
+      <div class="waveWrapper waveAnimation">
+         <div class="waveWrapperInner bgMiddle">
+            <div class="wave waveMiddle" style="background-image: url('images/wave1.png')"></div>
+         </div>
+         <div class="waveWrapperInner bgBottom">
+            <div class="wave waveBottom" style="background-image: url('images/wave1.png')"></div>
+         </div>
+      </div>
+      <audio id="buttonclick" preload="auto">
+         <source src="sound/button_click.ogg">
+      </audio>
+      <div class="container" id="main">
+         <header class="navbar navbar-default">
+            <!--div id="volume_icon" class="pull-left"></div-->
+            <!--div id="quit"><img id="quit-btn" src="images/quit.png"></div-->  
+            <div id="home" class="btn pull-left">
+               <img src="images/home.png">
+            </div>
+            <div id="quesarea">         
+            </div>
+         </header>
+         <section class="innercontainer">
+            <div id="listing_page">
+               <h1> നിങ്ങളുടെ ജല ഉപയോഗം എത്ര?</h1>
+               നിങ്ങളുടെ മൊത്തം ജല ഉപയോഗം കണക്കാക്കാൻ ഈ കാൽക്കുലേറ്റർ നിങ്ങളെ സഹായിക്കുന്നു. ടാപ്പിൽ നിന്നും വെള്ളം വരുന്നുണ്ടെന്ന് നിങ്ങൾക്കറിയാം, എന്നാൽ നിങ്ങളുടെ വീടിനകത്തും പുറത്തുമായി  എത്ര ജലം ഉപയോഗിക്കുന്നു എന്ന് നിങ്ങൾക്കറിയാമോ? ഒട്ടും താമസിക്കാതെതന്നെ അത് നിങ്ങൾ കണ്ടെത്തും... അതിനായ് നിങ്ങൾ തുടങ്ങുക.
+               </p>
+               <div id="button">
+                  <div id="option1" class="le_option">
+                     <button class="level btn btn-success" id="level1" data-order="1">GET STARTED</button>
+                  </div>
+               </div>
+            </div>
+            <div id="game_start">
+               <div id="container_level1" class="game">
+                  <div id="quiz-area">
+                     <div id="question-1" class="questions">
+                        <div class="question-topic-label"> 1. <img src="images/member.png">വീട്ടിൽ</div>
+                        <p class="question-text">നിങ്ങളുടെ വീട്ടിൽ എത്ര പേർ ഉണ്ട്?</p>
+                        <div id=response_area>
+                           <p><input type="number" min="1" value="1"/></p>
+                        </div>
+                        <div class="next-btn pill-button" id="next1"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-2" class="questions">
+                        <div class="question-topic-label">2. <img src="images/shower.png"> ഷവർ </div>
+                        <p class="question-text">കുളിക്കാൻ എടുക്കുന്ന സമയം?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="20"><span> < 5 min</span></div>
+                              <div  class="pill-button choice" data-value="40"><span>5-10 min</span></div>
+                              <div  class="pill-button choice" data-value="65"><span>11-15 min</span></div>
+                              <div  class="pill-button choice" data-value="100"><span> > 15 min</span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next2"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-3" class="questions">
+                        <div class="question-topic-label">2.1 <img src="images/shower.png"> ഷവർ </div>
+                        <p class="question-text">ദിവസത്തിൽ എത്ര പ്രാവശ്യം കുളിക്കും?</p>
+                        <div id=response_area>
+                           <p><input type="number" min="1"  value="1"/></p>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next3"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-4" class="questions">
+                        <div class="question-topic-label">2.2 <img src="images/shower.png"> ഷവർ </div>
+                        <p class="question-text">ലോ ഫ്ലോ ഷവർ ഹെഡ്  ഉണ്ടോ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="0.5"><span> ഉണ്ട് </span></div>
+                              <div  class="pill-button choice" data-value="1.0"><span>ഇല്ല </span></div>
+                              <div  class="pill-button choice" data-value="0.75"><span>കുറച്ചു </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next4"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-5" class="questions">
+                        <div class="question-topic-label">3. <img src="images/bathroom-sink.jpg"> ബാത്ത്റൂം </div>
+                        <p class="question-text">വാഷ്‌ബേസിനിലൂടെ എത്ര നേരത്തോളം വെള്ളം തുറന്നുവിട്ടു ഉപയോഗിക്കുന്നു?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="10"><span> < 5 min</span></div>
+                              <div  class="pill-button choice" data-value="2"><span>ആവശ്യത്തിന് മാത്രം </span></div>
+                              <div  class="pill-button choice" data-value="15"><span> > 5 min</span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next5"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-6" class="questions">
+                        <div class="question-topic-label">3.1 <img src="images/bathroom-sink.jpg"> ബാത്ത്റൂം  </div>
+                        <p class="question-text">നിങ്ങളുടെ ബാത്ത്റൂം  സിങ്കിൽ ലോ ഫ്ലോ ഫോസറ്റ് ഉണ്ടോ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="0.5"><span> ഉണ്ട് </span></div>
+                              <div  class="pill-button choice" data-value="1.0"><span>ഇല്ല </span></div>
+                              <div  class="pill-button choice" data-value="0.75"><span>കുറച്ചു </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next6"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-7" class="questions">
+                        <div class="question-topic-label">3.2 <img src="images/toilet.jpg">ബാത്ത്റൂം</div>
+                        <p class="question-text">ശരാശരി ഒരു  ദിവസം എത്ര  പ്രാവശ്യം  നിങ്ങൾ ടോയ്‌ലറ്റ് പോകാറുണ്ട് ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="4"><span> < 5 </span></div>
+                              <div  class="pill-button choice" data-value="8"><span> 5-10 </span></div>
+                              <div  class="pill-button choice" data-value="13"><span> > 10 </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next7"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-8" class="questions">
+                        <div class="question-topic-label">3.3 ബാത്ത്റൂം</div>
+                        <p class="question-text">ഫ്ലഷ് സംവിധാനം എങ്ങനെയാണു ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="6"><span> ഹൈ ഫ്ലഷ് </span></div>
+                              <div  class="pill-button choice" data-value="3"><span>ലോ ഫ്ലഷ് </span></div>
+                              <div  class="pill-button choice" data-value="20"><span>ഫ്ലഷ് ഇല്ല </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next8"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-9" class="questions">
+                        <div class="question-topic-label">4. കിച്ചൻ  </div>
+                        <p class="question-text">ദിവസത്തിൽ എത്ര പ്രാവശ്യം നിങ്ങൾ പാത്രങ്ങൾ കഴുകി വൃത്തിയാക്കും?</p>
+                        <div id=response_area>
+                           <p><input type="number" min="1"  value="1"/></p>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next9"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-10" class="questions">
+                        <div class="question-topic-label">4.1 കിച്ചൻ</div>
+                        <p class="question-text"> നിങ്ങൾ എത്ര സമയം കിച്ചൻ സിങ്കിലേ വെള്ളം തുറന്നു വിട്ടു പാത്രങ്ങൾ  വൃത്തിയാക്കും?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="10"><span> < 5 </span></div>
+                              <div  class="pill-button choice" data-value="20"><span> 5-10 </span></div>
+                              <div  class="pill-button choice" data-value="40"><span> > 20 </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next10"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-11" class="questions">
+                        <div class="question-topic-label">4.2 കിച്ചൻ</div>
+                        <p class="question-text">നിങ്ങളുടെ  കിച്ചൻ സിങ്കിൽ ലോ ഫ്ലോ ഫോസറ്റ് ഉണ്ടോ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="0.5"><span> ഉണ്ട് </span></div>
+                              <div  class="pill-button choice" data-value="1.0"><span>ഇല്ല </span></div>
+                              <div  class="pill-button choice" data-value="0.75"><span>കുറച്ചു </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next11"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-12" class="questions">
+                        <div class="question-topic-label">4.3 കിച്ചൻ</div>
+                        <p class="question-text">നിങ്ങൾ പാത്രങ്ങൾ വൃത്തിയാക്കുന്നത് എങ്ങനെയാണു?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="1"><span> കൈകൾ ഉപയോഗിച്ച് </span></div>
+                              <div  class="pill-button choice" data-value="0.25"><span>ഡിഷ് വാഷറിൽ  </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next12"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-13" class="questions">
+                        <div class="question-topic-label">5. ലോൺഡ്രി </div>
+                        <p class="question-text">നിങ്ങൾ തുണികൾ കഴുകുന്നത് എങ്ങനെയാണു?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="75"><span> കൈകൾ ഉപയോഗിച്ച് </span></div>
+                              <div  class="pill-button choice" data-value="120"><span>വാഷിങ് മെഷീനിൽ </span></div>
+                              <div  class="pill-button choice" data-value="1"><span>ട്രൈക്ലീൻ </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next13"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-14" class="questions">
+                        <div class="question-topic-label">6. ചെടികൾ</div>
+                        <p class="question-text">നിങ്ങൾ ചെടികൾ നനക്കാറുണ്ടോ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="yes"><span> ഉണ്ട് 
+                                 </span>
+                              </div>
+                              <div  class="pill-button choice" data-value="no"><span> ഇല്ല </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next14"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-15" class="questions">
+                        <div class="question-topic-label">6.1 ചെടികൾ</div>
+                        <p class="question-text">പൂന്തോട്ടം  എത്ര സ്‌ക്വയർ  ഫീറ്റ് ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="20"><span> < 200 </span></div>
+                              <div  class="pill-button choice" data-value="50"><span> 200 -500 </span></div>
+                              <div  class="pill-button choice" data-value="75"><span> > 500 </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next15"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-16" class="questions">
+                        <div class="question-topic-label">6.2 ചെടികൾ  </div>
+                        <p class="question-text">ദിവസത്തിൽ എത്ര പ്രാവശ്യം നിങ്ങൾ ചെടികൾ നനയ്‌ക്കും ?</p>
+                        <div id=response_area>
+                           <p><input type="number" min="1"  value="1"/></p>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next16"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-17" class="questions">
+                        <div class="question-topic-label">7. വെള്ളം സംഭരണി </div>
+                        <p class="question-text">മഴ വെള്ളം സംഭരണി യൂണിറ്റ് വീട്ടിൽ ഉണ്ടോ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="yes"><span> ഉണ്ട് 
+                                 </span>
+                              </div>
+                              <div  class="pill-button choice" data-value="no"><span> ഇല്ല </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next17"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-18" class="questions">
+                        <div class="question-topic-label">8. വാഹനം</div>
+                        <p class="question-text">നിങ്ങൾക്ക് വാഹനം ഉണ്ടോ?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="yes"><span> ഉണ്ട് 
+                                 </span>
+                              </div>
+                              <div  class="pill-button choice" data-value="no"><span> ഇല്ല </span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next18"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-19" class="questions">
+                        <div class="question-topic-label">8.1 വാഹനം</div>
+                        <p class="question-text">നിങ്ങളുടെ വാഹനം ഇവയിൽ ഏതാണ്?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="30"><span> ബൈക്ക്  
+                                 </span>
+                              </div>
+                              <div  class="pill-button choice" data-value="50"><span> കാർ  </span></div>
+                              <div  class="pill-button choice" data-value="85"><span> ഹെവി വെഹിക്കിൾ</span></div>
+                           </div>
+                        </div>
+                        <div class="prev-btn pill-button back"><span>പിന്നോട്ടു <<</span></div>
+                        <div class="next-btn pill-button" id="next19"><span>മുന്നോട്ടു >></span></div>
+                     </div>
+                     <div id="question-20" class="questions">
+                        <div class="question-topic-label">8.2 വാഹനം</div>
+                        <p class="question-text">നിങ്ങൾ വാഹനം എങ്ങനാണ് കഴുകി  വൃത്തിയാക്കുന്നത്?</p>
+                        <div id=response_area>
+                           <div class="multi-choice">
+                              <div  class="pill-button choice" data-value="1"><span>സ്വന്തമായി </span></div>
+                              <div  class="pill-button choice" data-value="0"><span>സർവീസ് സെന്ററിൽ </span></div>
+                           </div>
+                        </div>
+                        <div id="next20" class="next-btn pill-button submit"><span>കാൽക്കുലേറ്റ് </span></div>
+                     </div>
+                  </div>
+                  <!--question area-->
+                  <div id="drop-area">   
+                  </div>
+               </div>
+            </div>
+         </section>
+         <footer class="navbar navbar-default">
+            <div id="result"><span id="vol">0</span> L/Day</div>
+      </div>
+      </footer>
+      </div>
+   </body>
+</html>
+
+
