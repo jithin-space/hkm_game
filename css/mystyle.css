@@ -58,7 +58,7 @@ body {
 	width: 100vw;
 	background-size: 100% 100%;
 	background-position: center;
-	min-width: 600px;
+	min-width: 320px;
 	min-height: 400px;
 	border-radius: 25vh;
 }
@@ -207,7 +207,7 @@ body {
 	color: #00bcb6;
 	font-size: 1.5em;
 	border-bottom: 1px solid #a7e3e0;
-	width: 60%;
+	width: 100%;
 	margin: auto;
 }
 
@@ -286,6 +286,9 @@ body {
 
 #vol {
 	font-size: 10vh;
+}
+#result {
+	margin:0% 2%;
 }
 
 .question-topic-label>img {
@@ -419,30 +422,60 @@ div.time {
 }
 
 .waveTop {
-	background-size: 50% 200px;
+	background-size: 50% 215px;
 }
 
 .waveAnimation .waveTop {
-	animation: move-wave 1s;
-	-webkit-animation: move-wave 1s;
-	-webkit-animation-delay: 1s;
-	animation-delay: 1s;
+	animation: move-wave 100s linear infinite;
+	
 }
 
 .waveMiddle {
-	background-size: 50% 220px;
+	background-size: 50% 230px;
 }
 
 .waveAnimation .waveMiddle {
-	animation: move_wave 10s linear infinite;
+	animation: move_wave 6s linear infinite;
 }
 
 .waveBottom {
-	background-size: 50% 200px;
+	background-size: 50% 250px;
 }
 
 .waveAnimation .waveBottom {
-	animation: move_wave 12s linear infinite;
+	animation: move_wave 3s linear infinite;
 }
+/***********@media-screen****************************/
+
+ @media screen and (max-device-width: 800px){
+      #listing_page{
+      	width:96%;
+      	padding:2%;     
+      }
+      
+      #main header{
+      	margin-bottom:0px;
+      }
+      
+      	#quesarea{
+      	font-size:3.5vh;
+      }
+      #listing_page h1{
+      	margin-top:0px;
+      }
+      #button{
+      	top:0px;
+      }
+      #button .btn{
+      	margin: 0px 0px 0px -10%;
+      }
+      #quiz-area{
+      	width:100%
+      }
+      #home{
+      	left:0%;
+      	padding:2%;
+      }
+    }
 
 

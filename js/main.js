@@ -60,14 +60,40 @@ $(document).ready(function () {
 	$(".choice").click(function () {
 		$(".choice").removeClass("chosen");
 		$(this).addClass("chosen");
+		
 
 	});
+	
+	$(document).on('click', '.prev-btn', function () {
+	$("#buttonclick").trigger("play");
+	prev_calculation=calculation;
+	
+	$("#container_level1").hide('slide', {
+			direction: 'right'
+		}, 1000, function () {
+			$(".questions").hide();
+			count--;
+			$("#vol").html(calculation);
+
+
+			//alert("nextclicked- question no:-"+ count);
+
+			$("#container_level1").show('slide', {
+				direction: 'left'
+			}, 700);
+			$("#question-" + count).show();
+	});
+	});
+	
 
 	$(document).on('click', '.choice, .next-btn', function () {
+	$("#buttonclick").trigger("play");
 		if ($(this).hasClass("next-btn")) {
+		        
 			current_element = $(this).parent().children("#response_area").children().children(".chosen");
 		} else {
 			current_element = $(this);
+			clicked="choice";
 		}
 
 
@@ -205,7 +231,7 @@ $(document).ready(function () {
 				{
 					vehicle = current_element.data('value');
 					if (vehicle == "no") {
-						$('#submit').show();
+						count=count+2;
 					}
 					break;
 				}
@@ -231,14 +257,14 @@ $(document).ready(function () {
 			count++;
 			$("#vol").html(calculation);
 
+			$("#question-" + count).show();
 
 			//alert("nextclicked- question no:-"+ count);
 
 			$("#container_level1").show('slide', {
 				direction: 'right'
 			}, 700);
-			$("#question-" + count).show();
-
+			
 		});
 
 
