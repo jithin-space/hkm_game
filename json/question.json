@@ -1,0 +1,295 @@
+{
+	"questions": [{
+			"id": 1,
+			"label": "നിങ്ങളുടെ വീട്ടിൽ എത്ര പേർ ഉണ്ട്?",
+			"options": [{
+					"id": 1,
+					"label": "1-3",
+					"score": 0,
+					"image": "images/members1.png",
+					"unitConsumption": 1,
+					"feedback": "feedback"
+				},
+				{
+					"id": 2,
+					"label": "4-6",
+					"score": 0,
+					"image": "images/members2.png",
+					"unitConsumption": 1,
+					"feedback": ""
+				},
+
+				{
+					"id": 3,
+					"label": ">6",
+					"score": 0,
+					"image": "images/members3.png",
+					"unitConsumption": 1,
+					"feedback": ""
+				}
+			]
+		},
+		
+		{
+			"id": 2,
+			"label": "നിങ്ങൾ കുളിക്കുന്നത് എങ്ങനെ?",
+			"options": [{
+					"id": 1,
+					"label": "ബക്കറ്റും മഗ്ഗും ഉപയോഗിച്ച്",
+					"score": "+10",
+					"image": "images/bucket.jpeg",
+					"unitConsumption": 25,
+					"feedback": "ഏകദേശം 25L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "ഷവർ  ഉപയോഗിച്ച് ",
+					"score": "-10",
+					"image": "images/shower.jpeg",
+					"unitConsumption": 50,
+					"feedback": "ഏകദേശം 25L നഷ്ടം"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"label": "പല്ലു തേയ്ക്കുമ്പോൾ ",
+			"options": [{
+					"id": 1,
+					"label": "ടാപ്പ് നേരിട്ട് ഉപയോഗിക്കുന്നു",
+					"score": "+5",
+					"image": "images/tap.jpeg",
+					"unitConsumption": 5,
+					"feedback": "ഏകദേശം 5L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "മഗ്ഗ് ഉപയോഗിക്കുന്നു ",
+					"score": "-5",
+					"image": "images/mug.jpeg",
+					"unitConsumption": 10,
+					"feedback": "ഏകദേശം 5L നഷ്ടം"
+				}
+			]
+		},
+		
+		{
+			"id": 4,
+			"label": "പാത്രം കഴുകുന്ന വെള്ളം?",
+			"options": [{
+					"id": 1,
+					"label": "പുനരുപയോഗിക്കുന്നു",
+					"score": "+10",
+					"image": "images/reuse.jpg",
+					"unitConsumption": 30,
+					"feedback": "ഏകദേശം 30L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "വെറുതെ പോകുന്നു ",
+					"score": "-3",
+					"image": "images/waste.jpg",
+					"unitConsumption": 60,
+					"feedback": "ഏകദേശം 30L നഷ്ടം"
+				}
+			]
+		},
+		
+		{
+			"id": 5,
+			"label": "വാഹനം കഴുകുന്നത്?",
+			"options": [{
+					"id": 1,
+					"label": "ബക്കറ്റ് മഗ്ഗ് ഉപയോഗിച്ച്",
+					"score": "+10",
+					"image": "images/car_bucket.jpg",
+					"unitConsumption": 50,
+					"feedback": "ഏകദേശം 50L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "ഹോസ് ഉപയോഗിച്ച്",
+					"score": "-2",
+					"image": "images/car_hose.jpeg",
+					"unitConsumption": 100,
+					"feedback": "ഏകദേശം 50L നഷ്ടം"
+				},
+				{
+					"id": 3,
+					"label":"രണ്ടും ഉപയോഗിച്ചു ",
+					"score": "-4",
+					"image": "images/car_cleaning.png",
+					"unitConsumption": 80,
+					"feedback": "ഏകദേശം 30L നഷ്ടം"
+				},
+				{
+					"id": 4,
+					"label": "വാഹനം ഇല്ല",
+					"score": "+10",
+					"image": "images/no_vehicle.jpg",
+					"unitConsumption": 0,
+					"feedback": "ഏകദേശം 50L ലാഭം"
+				}
+			]
+		},
+		
+		{
+			"id": 6,
+			"label": "ചെടി നനയ്ക്കുന്നത് എങ്ങനെ ?",
+			"options": [{
+					"id": 1,
+					"label": "ബക്കറ്റ് മഗ്ഗ് ഉപയോഗിച്ച്",
+					"score": "+10",
+					"image": "images/bucket_water.jpeg",
+					"unitConsumption": 40,
+					"feedback": "ഏകദേശം 30L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "ഹോസ് ഉപയോഗിച്ച്",
+					"score": "-3",
+					"image": "images/hose.jpeg",
+					"unitConsumption": 70,
+					"feedback": "ഏകദേശം 30L നഷ്ടം"
+				},
+				{
+					"id": 3,
+					"label":"പൂവാലി ഉപയോഗിച്ച്",
+					"score": "+5",
+					"image": "images/can.jpeg",
+					"unitConsumption": 30,
+					"feedback": "ഏകദേശം 10L ലാഭം"
+				},
+				{
+					"id": 4,
+					"label": "നനയ്ക്കുന്നില്ല ",
+					"score": "+10",
+					"image": "images/no-water.jpeg",
+					"unitConsumption": 0,
+					"feedback": "ഏകദേശം 40L ലാഭം"
+				}
+			]
+		},
+		{
+			"id": 7,
+			"label": "വീട്ടിലെ പൈപ്പുകൾക്കു ലീക് ഉണ്ടോ?",
+			"options": [{
+					"id": 1,
+					"label": "ഉണ്ട്",
+					"score": "-3",
+					"image": "images/leak.jpg",
+					"unitConsumption": 20,
+					"feedback": "ഏകദേശം 20L നഷ്ടം"
+				},
+				{
+					"id": 2,
+					"label": "ഇല്ല ",
+					"score": "+10",
+					"image": "images/no-leak.jpeg",
+					"unitConsumption": 0,
+					"feedback": "ഏകദേശം 20L ലാഭം"
+				}
+			]
+		},
+		{
+			"id": 8,
+			"label": "ടോയ്‌ലെറ്റിൽ ഫ്ലഷ് സംവിധാനം ?",
+			"options": [{
+					"id": 1,
+					"label": "ഡബിൾ ഫ്ലഷ് ",
+					"score": "+5",
+					"image": "images/dual.jpeg",
+					"unitConsumption": 60,
+					"feedback": "ഏകദേശം 40L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "സിംഗിൾ ഫ്ലഷ് ",
+					"score": "-3",
+					"image": "images/single.jpg",
+					"unitConsumption": 100,
+					"feedback": "ഏകദേശം 50L നഷ്ടം"
+				},
+
+				{
+					"id": 3,
+					"label": "ഫ്ലഷ് ഇല്ല",
+					"score": "+10",
+					"image": "images/no-flush.jpeg",
+					"unitConsumption": 40,
+					"feedback": "ഏകദേശം 60L ലാഭം"
+				}
+			]
+		},
+		{
+			"id": 9,
+			"label": "തുണികൾ കഴുകുന്നത്?",
+			"options": [{
+					"id": 1,
+					"label": "കൈകൾ ഉപയോഗിച്ച് ",
+					"score": "+10",
+					"image": "images/hand.jpeg",
+					"unitConsumption": 75,
+					"feedback": "ഏകദേശം 75L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "വാഷിങ് മെഷീനിൽ ",
+					"score": "-5",
+					"image": "images/washing_mash.jpeg",
+					"unitConsumption": 150,
+					"feedback": "ഏകദേശം 75L നഷ്ടം"
+				}
+			]
+		},
+		
+		{
+			"id": 10,
+			"label": "പച്ചക്കറി കഴുകുന്ന വെള്ളം?",
+			"options": [{
+					"id": 1,
+					"label": "പുനരുപയോഗിക്കുന്നു",
+					"score": "+10",
+					"image": "images/reuse.jpg",
+					"unitConsumption": 30,
+					"feedback": "ഏകദേശം 30L ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "വെറുതെ പോകുന്നു ",
+					"score": "-3",
+					"image": "images/waste.jpg",
+					"unitConsumption": 60,
+					"feedback": "ഏകദേശം 30L നഷ്ടം"
+				}
+			]
+		},
+		{
+			"id": 11,
+			"label": "മഴ വെള്ളം സംഭരണി യൂണിറ്റ് വീട്ടിൽ ഉണ്ടോ?",
+			"options": [{
+					"id": 1,
+					"label": "ഉണ്ട്",
+					"score": "+10",
+					"image": "images/rain.jpeg",
+					"unitConsumption": 0,
+					"feedback": "ഒരു വർഷം നാല് മാസത്തെ വെള്ളം ലാഭം"
+				},
+				{
+					"id": 2,
+					"label": "ഇല്ല ",
+					"score": "-3",
+					"image": "images/no-rain.jpg",
+					"unitConsumption": 0,
+					"feedback": "ഒരു വർഷം നാല് മാസത്തെ വെള്ളം നഷ്ടം"
+				}
+			]
+		}
+		
+		
+
+		
+		
+
+	]
+}

@@ -1,57 +1,74 @@
 $(document).ready(function () {
-	count = 1;
+	count = 0;
 	default_member = 1;
 	calculation = 0;
-
 	lng = "mal";
-
+	slide_dir="right";
 	if (lng == "mal") {
 
-		$("#quesarea").html("വാട്ടർ ഫൂട്പ്രിന്റ് കാൽകുലേറ്റർ ");
+		$("#quesarea").html("ജല ബഡ്ജറ്റ് വീട്ടിലും ");
 		$("#level1").html("തുടങ്ങുക ");
 
 	}
 
-	correct = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-	$(".game, #home, #score, .time, #questionscreen, #volume_icon,.questions,#result, #submit").hide();
-
+	$(".game, #home, #score, .time, #questionscreen, #volume_icon,#result, #submit").hide();
+	
 	function reset() {
 
-		count = 1;
+		count = 0;
+		$("#choice-set").empty();
 		calculation = 0;
-
-		$(".game, #home").hide();
 		$("#listing_page,#copyright,#quit").show();
-		$(".game, #home, #score, .time, #questionscreen, #volume_icon,#quesarea2,.questions,#result").hide();
+		$(".game, #home, #score, .time, #questionscreen, #volume_icon,#quesarea2,#result").hide();
 		$("audio").trigger("pause");
 
 
 	}
 
-
-	function randOrd() {
-		return (Math.round(Math.random()) - 0.5);
-	}
-
-	$(".level").click(function () {
+	$(".start").click(function () {
 		calculation = 0;
 		//calculation=350*1;
-
 		$("#buttonclick").trigger("play");
 		levelId = $(this).attr('id');
 		order = $(this).data("order");
 		$("#listing_page,#copyright").hide();
 		$("#quit").fadeOut();
 		$("#home, .time, #volume_icon, #score").fadeIn(1000);
-		$("#container_level" + order).show('slide', {
-			direction: 'right'
-		}, 1000);
-		$("#question-1").show('slide', {
-			direction: 'right'
-		}, 1000);
-		$('#result').show();
-
+		result = $.getJSON("json/question.json", function() {
+			output = result.responseJSON.questions;
+			console.log(output);
+			//$(".questions").hide();
+			questions();		
 	});
+	});
+
+	function questions(){
+
+	if(count<1){
+	$("#prev").hide();
+	}else{
+	$("#prev").show();
+	}
+	$("#choice-set").empty();
+	question = output[count].label;
+	question_id = output[count].id;
+
+	//choices=output[count].options;
+	options=output[count].options;
+
+	grid= 12/options.length;
+	//datas=output[count].datas;
+	$("#question-text").text(question);
+	for (i=0; i<options.length; i++){
+	 $("#choice-set").append('<div  id="question'+question_id+'-choice'+options[i].id+'" class="choice col-'+grid+'" data-score="'+options[i].score+'" data-value="'+options[i].unitConsumption+'" data-feedback="'+options[i].feedback+'"><img src="'+options[i].image+'"><div class="pill-button">'+options[i].label+'</div></div>');
+		}
+	$("#container_level1").show('slide', {
+				direction: slide_dir
+			}, 700);
+				
+	
+	$('#result').show();
+	}//questions
 
 	$("#volume_icon").on('click', function () {
 		$("#questaudio").trigger('play');
@@ -60,36 +77,35 @@ $(document).ready(function () {
 	$(".choice").click(function () {
 		$(".choice").removeClass("chosen");
 		$(this).addClass("chosen");
-		
+
 
 	});
-	
+
 	$(document).on('click', '.prev-btn', function () {
 	$("#buttonclick").trigger("play");
 	prev_calculation=calculation;
 	
 	$("#container_level1").hide('slide', {
 			direction: 'right'
-		}, 1000, function () {
-			$(".questions").hide();
+		}, 700, function () {
+			
 			count--;
 			$("#vol").html(calculation);
-
+			$("#choice-set").empty();
 
 			//alert("nextclicked- question no:-"+ count);
+			slide_dir="left";
+			questions();
+			
+		
+	});
+	});
 
-			$("#container_level1").show('slide', {
-				direction: 'left'
-			}, 700);
-			$("#question-" + count).show();
-	});
-	});
-	
 
 	$(document).on('click', '.choice, .next-btn', function () {
 	$("#buttonclick").trigger("play");
 		if ($(this).hasClass("next-btn")) {
-		        
+
 			current_element = $(this).parent().children("#response_area").children().children(".chosen");
 		} else {
 			current_element = $(this);
@@ -97,7 +113,7 @@ $(document).ready(function () {
 		}
 
 
-		switch (count) {
+		/*switch (count) {
 
 			case 1:
 				{
@@ -249,23 +265,41 @@ $(document).ready(function () {
 					break;
 				}
 
-		} //switch
-		$("#container_level1").hide('slide', {
+		} *///switch
+
+			if (count< output.length-1){
+
+
+			
+	$("#container_level1").hide('slide', {
 			direction: 'left'
-		}, 1000, function () {
-			$(".questions").hide();
+		}, 700, function () {
+		
+			
 			count++;
 			$("#vol").html(calculation);
 
-			$("#question-" + count).show();
+			slide_dir="right";
+			questions();
+			
+			//alert("nextclicked- question no:-"+ count);
+			
+			
+			
+	});		
+			}else{
+			alert("survey ends");
+			}
+			$("#vol").html(calculation);
+
+			
 
 			//alert("nextclicked- question no:-"+ count);
 
-			$("#container_level1").show('slide', {
-				direction: 'right'
-			}, 700);
-			
-		});
+
+
+
+
 
 
 	});
@@ -280,5 +314,3 @@ $(document).ready(function () {
 	});
 
 });
-
-
