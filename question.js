@@ -25,7 +25,7 @@ Question.prototype.attach = function($container){
   this.$questionLabel =$('<div class="my-5"><h2 class="text-primary">'+this.data.label+'</h2></div>');
   this.$questionLabel.appendTo($container);
 
-  that.$optionContainer = $('<div class="card-deck justify-content-center mb-3"></div>');
+  that.$optionContainer = $('<div class="card-deck justify-content-center mb-5"></div>');
 
   this.options.forEach(function(opt){
     opt.attach(that.$optionContainer);
@@ -40,7 +40,9 @@ Question.prototype.attach = function($container){
       $(this).trigger({
         type: 'answered',
         questionId: that.data.id,
-        optionId: e.optionId
+        optionId: e.optionId,
+        optionData: e.optionData,
+        isSingle: that.data.isSingle
       });
     });
 }

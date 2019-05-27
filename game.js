@@ -23,25 +23,34 @@ Game.prototype.initGame = function($container){
   that.$container = $container;
 
   const $startButton= $('<button>',{
-    'text':'Start Game',
+    'text':'തുടങ്ങുക',
     'type':'button',
     'class': 'btn btn-primary btn-lg'
   });
 
-  this.$header= $(' <nav class="navbar navbar-expand-sm  justify-content-center"><h1>'+this.data.title+'</h1></nav> ');
 
-  this.$gameArea=$('<div class="jumbotron text-center pt-1">\
-                        <h1>'+this.data.descHeading+'</h1>\
-                        <p>'+this.data.description+'</p>\
+  this.$gameArea=$('<div class="jumbotron game-area text-center pt-4">\
                         </div>');
+  this.$descArea= $('<div><h2 class="mt-5">'+this.data.descHeading+'</h2>\
+    <p class="text-justify p-2">'+this.data.description+'</p></div>');
+
+  // this.$header= $(' <nav class="navbar navbar-expand-sm  justify-content-center"><h1>'+this.data.title+'</h1></nav> ');
+
+  this.$header= $('<div class="card bg-info">\
+    <div class="card-body text-white"><h2>'+this.data.title+'</h2></div>\
+    </div>');
+
+  this.$header.appendTo(this.$gameArea);
+  this.$descArea.appendTo(this.$gameArea);
   $startButton.appendTo(this.$gameArea);
 
-  this.$header.appendTo($container);
+
   this.$gameArea.appendTo($container);
 
 
   $startButton.on('click',function(){
     that.$gameArea.empty();
+    that.$header.remove();
     that.startGame();
   });
 }
@@ -73,14 +82,13 @@ Game.prototype.createDOMElements= function(){
 
   for(let i=0;i<this.questions.length;i++){
     $('<li class="nav-item mx-auto">\
-      <a class="nav-link text-center" id="question_'+i+'" data-toggle="tab" href="#home"><h5>'+parseInt(i+1)+'</h5></a>\
+      <a class="nav-link text-center bg-white" id="question_'+i+'" data-toggle="tab" href="#home"><h4>'+parseInt(i+1)+'</h4></a>\
     </li>').appendTo(that.$stepBar)
   }
 
   this.$progressBar=$('<div class="progress mx-auto">\
   <div class="progress-bar" style="width:0%"></div>\
   </div>');
-
 
 
 
@@ -108,16 +116,18 @@ Game.prototype.createDOMElements= function(){
   this.$prevButton.appendTo(this.$buttonContainer);
   this.$nextButton.appendTo(this.$buttonContainer);
 
+  this.$stepBar.appendTo(this.$gameWrapper);
+  this.$progressBar.appendTo(this.$gameWrapper);
+
   this.$questionDiv.appendTo(this.$gameWrapper);
   this.$buttonContainer.appendTo(this.$gameWrapper);
 
-  this.$stepBar.appendTo(this.$gameWrapper);
-  this.$progressBar.appendTo(this.$gameWrapper);
+
   this.$gameWrapper.appendTo(this.$gameArea);
 
 
   this.$nextButton.on('click',function(){
-    
+
     that.response[that.currentIndex]={'answered':false, 'option':''};
     that.nextQuestion();
 
@@ -130,13 +140,13 @@ Game.prototype.createDOMElements= function(){
 
   this.$questionDiv.on('answered',function(e){
 
-      that.response[e.questionId]={'answered':true, 'option':e.optionId};
+      that.response[e.questionId]={'answered':true, 'option':e.optionId,'optionData': e.optionData};
 
       const nextStat = (that.currentIndex === that.questions.length-1)?true:false;
 
       if(!nextStat){
         that.nextQuestion();
-        console.log(that.response);
+
       }
       else{
         that.gameOn=false;
@@ -203,21 +213,116 @@ Game.prototype.showOutput = function(){
 
   this.$gameWrapper.empty();
 
-  const str = JSON.stringify(this.response, null, 2);
+  const output = this.calculateResults();
 
   const $restartButton= $('<button>',{
-    'text':'Restart Quiz',
-    'type':'button'
+    'html':'Restart Quiz<i class="fa fa-retry"></i>',
+    'type':'button',
+    'class': 'btn btn-primary btn-lg'
   });
 
 
 
-  this.$output = $('<div>'+str+'</div>').appendTo(this.$gameWrapper);
+  // this.$output = $('<div><h1>Your Score:'+output['totalScore']+'</h1><h2>Avg User Index:'+output['avgIndex']+'<h2></div>').modal('show');
 
-  $restartButton.appendTo(this.$container);
+
+  // this.$output= $('<div class="modal modal-sm fade" id="myModal">\
+  //       <div class="modal-dialog modal-dialog-centered">\
+  //         <div class="modal-content">\
+  //           <div class="modal-header">\
+  //             <h4 class="modal-title">Your Results</h4>\
+  //             <button type="button" class="close" data-dismiss="modal">&times;</button>\
+  //           </div>\
+  //           <div class="modal-body">\
+  //             <h1>Your Score:'+output['totalScore']+'</h1><h2>Avg User Index:'+output['avgIndex']+'<h2>\
+  //           </div>\
+  //           <div class="modal-footer">\
+  //             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>\
+  //           </div>\
+  //         </div>\
+  //       </div>\
+  //     </div>').modal('show');
+
+
+      this.$output= $('<div class="modal  fade" id="myModal">\
+            <div class="modal-dialog modal-dialog-centered">\
+              <div class="modal-content">\
+                <div class="modal-body card">\
+                    <img class="card-img-top rounded-circle text-center badge-image" src="images/trophy.png" alt="Card image">\
+                    <div class="card-body text-center">\
+                      <h1 class="card-title">Your Score:'+output['totalScore']+'</h1>\
+                      <h2 class="card-text">Avg User Index:'+output['avgIndex']+'<h2>\
+                      <button type="button" class="btn btn-danger mt-2" data-dismiss="modal">Close</button>\
+                  </div>\
+                </div>\
+              </div>\
+            </div>\
+          </div>').modal('show');
+
+
+  // .appendTo(this.$gameWrapper);
+
+  this.$feedbackContainer=$('<table>',{
+    'class': 'table table-striped table-bordered table-sm table-responsive',
+    'html':'<tr><th>Number</th><th>Question</th><th>Answerd</th><th>Answer</th><th>Feedback</th></tr>'
+  });
+
+
+
+
+  const feedback = that.response;
+  delete feedback['0'];
+
+
+  Object.keys(feedback).forEach(function(rec){
+
+    const $rec= $('<tr><td>'+rec+'</td><td>'+that.questions[rec].data['label']+'</td><td>'+feedback[rec]['answered']+'</td></tr>');
+
+    if(feedback[rec]['answered']){
+     $('<td>'+feedback[rec]['optionData']['label']+'</td>').appendTo($rec);
+    $('<td>'+feedback[rec]['optionData']['feedback']+'</td>').appendTo($rec);
+    }
+    else{
+        $('<td></td>').appendTo($rec);
+        $('<td></td>').appendTo($rec);
+    }
+    that.$feedbackContainer.append($rec);
+  });
+
+  $('<h2 class="text-center">Your Responses</h2>').appendTo(this.$gameWrapper);
+  this.$feedbackContainer.appendTo(this.$gameWrapper);
+
+  $restartButton.appendTo(this.$gameWrapper);
+
 
   $restartButton.on('click',function(){
     that.$container.empty();
     that.initGame(that.$container);
   });
+}
+
+Game.prototype.calculateResults = function(){
+
+  const that=this;
+  let totalScore=0;
+  let totalIndex=0;
+  const unit= (that.response['0']['optionData'])?parseInt(that.response['0']['optionData']['unitConsumption']):1;
+
+  Object.keys(this.response).forEach(function(inp){
+    if(that.response[inp]['answered']){
+       let data= that.response[inp]['optionData'];
+       totalScore+=parseInt(data.score);
+       if(inp !== "0"){
+         if(that.response[inp]['isSingle']){
+           totalIndex+=(parseInt(data.unitConsumption)*unit);
+         }
+         else{
+           totalIndex+=parseInt(data.unitConsumption);
+         }
+       }
+
+    }
+  });
+
+  return {'totalScore':totalScore,'avgIndex': totalIndex/unit};
 }

@@ -1,0 +1,60 @@
+{
+   "questions":[
+      {
+         "id":1,
+         "label":"നിങ്ങളുടെ വീട്ടിൽ എത്ര പേർ ഉണ്ട്?",
+         "headImage":"images/member.png",
+         "category":"വീട്ടിൽ",
+         "options":[
+            {
+               "id":1,
+               "label":"1-3",
+               "score":0,
+               "image":"images/members1.png",
+               "unitConsumption":1,
+               "feedback":"feedback"
+            },
+            {
+               "id":2,
+               "label":"4-6",
+               "score":0,
+               "image":"images/members2.png",
+               "unitConsumption":1,
+               "feedback":"feedback"
+            },
+            {
+               "id":3,
+               "label":"> 6",
+               "score":0,
+               "image":"images/members3.png",
+               "unitConsumption":1,
+               "feedback":"feedback"
+            }
+         ]
+      },
+      {
+         "id":2,
+         "label":"നിങ്ങൾ കുളിക്കുന്നത് എങ്ങനെ?",
+         "headImage":"images/shower.png",
+         "category":"ഷവർ",
+         "options":[
+            {
+               "id":1,
+               "label":"ബക്കറ്റും മഗ്ഗും ഉപയോഗിച്ച്",
+               "score":0,
+               "image":"images/bucket.jpeg",
+               "unitConsumption":1,
+               "feedback":"feedback"
+            },
+            {
+               "id":2,
+               "label":"ഷവർ  ഉപയോഗിച്ച് ",
+               "score":0,
+               "image":"images/shower.jpeg",
+               "unitConsumption":1,
+               "feedback":"feedback"
+            }
+         ]
+      }
+   ]
+}
