@@ -4,7 +4,9 @@ function Option(optionParameters){
 
 Option.prototype.attach=function($container){
   const that=this;
- const $optionsDiv= $('<div><button>'+this.data.label+'</button></div>');
+ const $optionsDiv= $('<div class="card bg-default option-card" style="max-width:250px;">\
+                      <img class="card-img-top" src="'+this.data.image+'" alt="'+this.data.label+'"/>\
+                      <div class="card-body">'+this.data.label+'</div></div>');
  $optionsDiv.appendTo($container);
  $optionsDiv.on('click',function(e){
 

@@ -22,10 +22,11 @@ Question.prototype.attach = function($container){
 
   const that=this;
 
-  this.$questionLabel =$('<div>'+this.data.label+'</button>');
+  this.$questionLabel =$('<div class="my-5"><h2 class="text-primary">'+this.data.label+'</h2></div>');
   this.$questionLabel.appendTo($container);
 
-  that.$optionContainer = $('<div></div>');
+  that.$optionContainer = $('<div class="card-deck justify-content-center mb-3"></div>');
+
   this.options.forEach(function(opt){
     opt.attach(that.$optionContainer);
   });
