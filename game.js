@@ -112,7 +112,7 @@ Game.prototype.createDOMElements= function(){
   });
 
   this.$submitButton=$('<button>',{
-    'html': 'സ്കോർ  കാണുക <i class="fa fa-angle-double-right"> </i>',
+    'html': 'സ്കോർ  കാണുക >> </i>',
     'type': 'button',
     'class': 'btn btn-primary btn-lg float-sm-right '
   });
