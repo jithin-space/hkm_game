@@ -237,7 +237,7 @@
 
         		{
         			"id": 1,
-        			"label": "നിങ്ങൾ കുളിക്കാൻ ഉപയോഗിക്കുന്നത്?",
+        			"label": "കുളിക്കാൻ ?",
         			"options": [{
         					"id": 0,
         					"label": "ബക്കറ്റും മഗ്ഗും",
@@ -258,7 +258,7 @@
         		},
         		{
         			"id": 2,
-        			"label": "പല്ലു തേയ്ക്കുമ്പോൾ വെള്ളം ഉപയോഗിക്കുന്നത് ?",
+        			"label": "പല്ലു തേയ്ക്കുമ്പോൾ ?",
         			"options": [{
         					"id": 0,
         					"label": "ടാപ്പ് നേരിട്ട്",
@@ -277,32 +277,9 @@
         				}
         			]
         		},
-
         		{
         			"id": 3,
-        			"label": "പാത്രം കഴുകുന്ന വെള്ളം?",
-        			"options": [{
-        					"id": 0,
-        					"label": "പുനരുപയോഗിക്കുന്നു",
-        					"score": "+10",
-        					"image": "images/reuse.jpg",
-        					"unitConsumption": 30,
-        					"feedback": "ഏകദേശം 30L ലാഭം"
-        				},
-        				{
-        					"id": 1,
-        					"label": "വെറുതെ പോകുന്നു ",
-        					"score": "-2",
-        					"image": "images/waste.jpg",
-        					"unitConsumption": 30,
-        					"feedback": "ഏകദേശം 30L നഷ്ടം"
-        				}
-        			]
-        		},
-
-        		{
-        			"id": 4,
-        			"label": "വാഹനം കഴുകാൻ ഉപയോഗിക്കുന്നത്?",
+        			"label": "വാഹനം കഴുകാൻ ?",
         			"options": [{
         					"id": 0,
         					"label": "ബക്കറ്റ് മഗ്ഗ്",
@@ -319,7 +296,7 @@
         					"unitConsumption": 100,
         					"feedback": "ഏകദേശം 50L നഷ്ടം"
         				},
-        				
+
         				{
         					"id": 2,
         					"label": "വാഹനം ഇല്ല",
@@ -332,8 +309,8 @@
         		},
 
         		{
-        			"id": 5,
-        			"label": "ചെടി നനയ്ക്കാൻ ഉപയോഗിക്കുന്നത്? ",
+        			"id": 4,
+        			"label": "ചെടി നനയ്ക്കാൻ ? ",
         			"options": [
         				{
         					"id": 0,
@@ -362,8 +339,8 @@
         			]
         		},
         		{
-        			"id": 6,
-        			"label": "വീട്ടിലെ പൈപ്പുകൾക്കു ലീക്ക് ഉണ്ടോ?",
+        			"id": 5,
+        			"label": "വീട്ടിലെ പൈപ്പുകൾക്കു ചോർച്ച ഉണ്ടോ?",
         			"options": [{
         					"id": 0,
         					"label": "ഉണ്ട്",
@@ -376,20 +353,20 @@
         					"id": 1,
         					"label": "ഇല്ല ",
         					"score": "+5",
-        					"image": "images/no-leak.jpeg",
+        					"image": "images/tap_r.jpg",
         					"unitConsumption": 0,
         					"feedback": "ജലം നഷ്ടപെടുന്നില്ല "
         				}
         			]
         		},
         		{
-        			"id": 7,
-        			"label": "ടോയ്‌ലെറ്റിൽ ഫ്ലഷ് സംവിധാനം ?",
+        			"id": 6,
+        			"label": "ടോയ്‌ലെറ്റിലെ ഫ്ലഷ് സംവിധാനം ?",
         			"options": [{
         					"id": 0,
         					"label": "ഡബിൾ ഫ്ലഷ് ",
         					"score": "+5",
-        					"image": "images/dual.jpeg",
+        					"image": "images/dual-flush-toilet12.jpg",
         					"unitConsumption": 30,
         					"feedback": "ഏകദേശം 40L ലാഭം"
         				},
@@ -413,7 +390,7 @@
         			]
         		},
         		{
-        			"id": 8,
+        			"id": 7,
         			"label": "തുണികൾ കഴുകുന്നത്?",
         			"options": [{
         					"id": 0,
@@ -435,13 +412,13 @@
         		},
 
         		{
-        			"id": 9,
+        			"id": 8,
         			"label": "പച്ചക്കറി കഴുകുന്ന വെള്ളം?",
         			"options": [{
         					"id": 0,
         					"label": "പുനരുപയോഗിക്കുന്നു",
         					"score": "+1",
-        					"image": "images/reuse.jpg",
+        					"image": "images/hose.jpeg",
         					"unitConsumption": 30,
         					"feedback": "ഏകദേശം 30L ലാഭം"
         				},
@@ -456,7 +433,7 @@
         			]
         		},
         		{
-        			"id": 10,
+        			"id": 9,
         			"label": "മഴവെള്ളസംഭരണി യൂണിറ്റ് വീട്ടിൽ ഉണ്ടോ?",
         			"options": [{
         					"id": 0,
@@ -470,9 +447,31 @@
         					"id": 1,
         					"label": "ഇല്ല ",
         					"score": "-10",
-        					"image": "images/no-rain.jpg",
+        					"image": "images/water_reduce.jpeg",
         					"unitConsumption": 0,
         					"feedback": "ഒരു വർഷം നാല് മാസത്തെ വെള്ളം നഷ്ടം"
+        				}
+        			]
+        		},
+            {
+        			"id": 10,
+        			"label": "പറമ്പിൽ വീഴുന്ന മഴവെള്ളം ?",
+              "isSingle":false,
+        			"options": [{
+        					"id": 0,
+        					"label": "പറമ്പിൽ താഴാൻ അനുവദിക്കുന്നു",
+        					"score": "+10",
+        					"image": "images/harvest_reduced.jpg",
+        					"unitConsumption": 30,
+        					"feedback": "ഏകദേശം 30L ലാഭം"
+        				},
+        				{
+        					"id": 1,
+        					"label": "ഒഴുക്കിക്കളയുന്നു ",
+        					"score": "-3",
+        					"image": "images/waste_flow_reduced.jpg",
+        					"unitConsumption": 60,
+        					"feedback": "ഏകദേശം 30L നഷ്ടം"
         				}
         			]
         		}
