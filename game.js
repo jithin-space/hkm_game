@@ -112,7 +112,7 @@ Game.prototype.createDOMElements= function(){
   });
 
   this.$submitButton=$('<button>',{
-    'html': 'പ്രതികരണങ്ങൾ കാണുക <i class="fa fa-angle-double-right"> </i>',
+    'html': 'സ്കോർ  കാണുക <i class="fa fa-angle-double-right"> </i>',
     'type': 'button',
     'class': 'btn btn-primary btn-lg float-sm-right '
   });
@@ -226,7 +226,7 @@ Game.prototype.showOutput = function(){
   const output = this.calculateResults();
 
   const $restartButton= $('<button>',{
-    'html':'വീണ്ടും കളിക്കുക്ക <i class="fa fa-retry"></i>',
+    'html':'വീണ്ടും കളിക്കുക <i class="fa fa-retry"></i>',
     'type':'button',
     'class': 'btn btn-success btn-lg'
   });
