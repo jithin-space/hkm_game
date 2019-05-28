@@ -25,7 +25,7 @@ Game.prototype.initGame = function($container){
   const $startButton= $('<button>',{
     'text':'തുടങ്ങുക',
     'type':'button',
-    'class': 'btn btn-primary btn-lg'
+    'class': 'btn btn-primary start btn-lg'
   });
 
 
@@ -43,15 +43,21 @@ Game.prototype.initGame = function($container){
   this.$header.appendTo(this.$gameArea);
   this.$descArea.appendTo(this.$gameArea);
   $startButton.appendTo(this.$gameArea);
-
+  console.log(this.data.audioBtn);
+  $('<audio id="buttonclick" preload="auto"><source src="'+this.data.audioBtn+'"></audio>').appendTo($container);
+   $('<audio id="optionclick" preload="auto"><source src="'+this.data.audioOptn+'"></audio>').appendTo($container);
+  
 
   this.$gameArea.appendTo($container);
 
 
   $startButton.on('click',function(){
+    $("#buttonclick").trigger('play');
     that.$gameArea.empty();
     that.$header.remove();
     that.startGame();
+    
+    
   });
 }
 
@@ -94,19 +100,19 @@ Game.prototype.createDOMElements= function(){
 
 
   this.$nextButton= $('<button>',{
-    'html':'Next<i class="fa fa-arrow-right"></i>',
+    'html':' >> ',
     'type':'button',
     'class': 'btn btn-success btn-lg float-sm-right'
   });
 
   this.$prevButton= $('<button>',{
-    'html':'<i class="fa fa-arrow-left"></i>Prev',
+    'html':' << ',
     'type':'button',
     'class': 'btn btn-danger btn-lg float-sm-left'
   });
 
   this.$submitButton=$('<button>',{
-    'html': 'Submit<i class="fa fa-angle-double-right"></i>',
+    'html': 'പ്രതികരണങ്ങൾ കാണുക <i class="fa fa-angle-double-right"> </i>',
     'type': 'button',
     'class': 'btn btn-primary btn-lg float-sm-right '
   });
@@ -127,18 +133,21 @@ Game.prototype.createDOMElements= function(){
 
 
   this.$nextButton.on('click',function(){
-
+    $("#buttonclick").trigger('play');
     that.response[that.currentIndex]={'answered':false, 'option':''};
     that.nextQuestion();
 
   });
 
   this.$prevButton.on('click',function(){
+    $("#buttonclick").trigger('play');
     that.response[that.currentIndex-1]={'answered':false, 'option':''};
     that.prevQuestion();
   });
 
   this.$questionDiv.on('answered',function(e){
+  
+      $("#optionclick").trigger('play');
 
       that.response[e.questionId]={'answered':true, 'option':e.optionId,'optionData': e.optionData};
 
@@ -184,6 +193,7 @@ Game.prototype.showQuestion = function(){
       this.$submitButton.appendTo(this.$buttonContainer);
       this.$nextButton.hide();
       this.$submitButton.on('click',function(){
+        $("#buttonclick").trigger('play');
         that.gameOn=false;
         that.response[that.currentIndex]={'answered':false, 'option':''};
         that.showOutput();
@@ -216,9 +226,9 @@ Game.prototype.showOutput = function(){
   const output = this.calculateResults();
 
   const $restartButton= $('<button>',{
-    'html':'Restart Quiz<i class="fa fa-retry"></i>',
+    'html':'വീണ്ടും കളിക്കുക്ക <i class="fa fa-retry"></i>',
     'type':'button',
-    'class': 'btn btn-primary btn-lg'
+    'class': 'btn btn-success btn-lg'
   });
 
 
@@ -250,9 +260,9 @@ Game.prototype.showOutput = function(){
                 <div class="modal-body card">\
                     <img class="card-img-top rounded-circle text-center badge-image" src="images/trophy.png" alt="Card image">\
                     <div class="card-body text-center">\
-                      <h1 class="card-title">Your Score:'+output['totalScore']+'</h1>\
-                      <h2 class="card-text">Avg User Index:'+output['avgIndex']+'<h2>\
-                      <button type="button" class="btn btn-danger mt-2" data-dismiss="modal">Close</button>\
+                      <h1 class="card-title">നിങ്ങളുടെ സ്കോർ: '+output['totalScore']+'</h1>\
+                      <h2 class="card-text">ശരാശരി  ഉപയോഗം: '+output['avgIndex']+'L<h2>\
+                      <button type="button" class="btn btn-danger mt-2" data-dismiss="modal"> X </button>\
                   </div>\
                 </div>\
               </div>\
@@ -264,7 +274,7 @@ Game.prototype.showOutput = function(){
 
   this.$feedbackContainer=$('<table>',{
     'class': 'table table-striped table-bordered table-sm table-responsive',
-    'html':'<tr><th>Number</th><th>Question</th><th>Answerd</th><th>Answer</th><th>Feedback</th></tr>'
+    'html':'<tr>നമ്പർ <th></th><th>ചോദ്യം</th><th>ഉത്തരം നല്കിയോ?</th><th>ഉത്തരം</th><th>ഫീഡ്ബാക്ക്</th></tr>'
   });
 
 
@@ -276,26 +286,29 @@ Game.prototype.showOutput = function(){
 
   Object.keys(feedback).forEach(function(rec){
 
-    const $rec= $('<tr><td>'+rec+'</td><td>'+that.questions[rec].data['label']+'</td><td>'+feedback[rec]['answered']+'</td></tr>');
+    const $rec= $('<tr><td>'+rec+'</td><td>'+that.questions[rec].data['label']+'</td></tr>');
 
     if(feedback[rec]['answered']){
+    $('<td>നൽകി </td>').appendTo($rec);
      $('<td>'+feedback[rec]['optionData']['label']+'</td>').appendTo($rec);
     $('<td>'+feedback[rec]['optionData']['feedback']+'</td>').appendTo($rec);
     }
     else{
+    	$('<td>നൽകിയില്ല </td>').appendTo($rec);
         $('<td></td>').appendTo($rec);
         $('<td></td>').appendTo($rec);
     }
     that.$feedbackContainer.append($rec);
   });
 
-  $('<h2 class="text-center">Your Responses</h2>').appendTo(this.$gameWrapper);
+  $('<h2 class="text-center">നിങ്ങളുടെ പ്രതികരണങ്ങൾ</h2>').appendTo(this.$gameWrapper);
   this.$feedbackContainer.appendTo(this.$gameWrapper);
 
   $restartButton.appendTo(this.$gameWrapper);
 
 
   $restartButton.on('click',function(){
+    $("#buttonclick").trigger('play');
     that.$container.empty();
     that.initGame(that.$container);
   });
@@ -324,5 +337,5 @@ Game.prototype.calculateResults = function(){
     }
   });
 
-  return {'totalScore':totalScore,'avgIndex': totalIndex/unit};
+  return {'totalScore':totalScore,'avgIndex': parseInt(totalIndex/unit)};
 }
