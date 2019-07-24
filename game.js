@@ -226,7 +226,7 @@ Game.prototype.showOutput = function(){
   const output = this.calculateResults();
 
   const $restartButton= $('<button>',{
-    'html':'വീണ്ടും കളിക്കുക <i class="fa fa-retry"></i>',
+    'html':'വീണ്ടും  ആരംഭിക്കുക  <i class="fa fa-retry"></i>',
     'type':'button',
     'class': 'btn btn-success btn-lg'
   });
@@ -260,8 +260,9 @@ Game.prototype.showOutput = function(){
                 <div class="modal-body card">\
                     <img class="card-img-top rounded-circle text-center badge-image" src="images/trophy.png" alt="Card image">\
                     <div class="card-body text-center">\
-                      <h1 class="card-title">നിങ്ങളുടെ സ്കോർ: '+output['totalScore']+'</h1>\
-                      <h2 class="card-text">ശരാശരി  ഉപയോഗം: '+output['avgIndex']+'L<h2>\
+                      <h1 class="card-title">നിങ്ങളുടെ സ്കോർ: '+output['totalScore']+'/100</h1>\
+                      <h2 class="card-text">ശരാശരി  ഉപയോഗം: '+output['avgIndex']+'L</h2>\
+			<p><small class="text-danger">**മുകളിൽ കാണിക്കുന്ന ഉത്തരങ്ങൾ ശാസ്ത്രീയമായി തിട്ടപ്പെടുത്തിയിട്ടുള്ളതല്ല.ബോധവൽക്കരണത്തിന് വേണ്ടി മാത്രമുള്ളതാണ്  **</small></p>\
                       <button type="button" class="btn btn-danger mt-2" data-dismiss="modal"> X </button>\
                   </div>\
                 </div>\
